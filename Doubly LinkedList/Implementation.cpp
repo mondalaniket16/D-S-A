@@ -86,19 +86,87 @@ Node* insertInBetween(Node* head, int data, int position)
 {
     int count=0;
     Node* temp=head;
+    Node* newNode=new Node(data);
     while(temp!=NULL)
     {
-        if(count==position-1)
+        if(count==position-1)       // position is of last or middle node
         {
-            Node* newNode=new Node(data);
             newNode->next=temp->next;
             temp->next=newNode;
             newNode->prev=temp;
+        }
+        else if(count==position && temp->prev==NULL)     // if position is of first node
+        {
+            newNode->next=temp;
+            temp->prev=newNode;
+            return newNode; // new head;
         }
         count++;
         temp=temp->next;
     }
     return head;
+}
+
+Node* deleteFromBackUsingTail(Node* tail)
+{
+    tail=tail->prev;
+    tail->next=NULL;
+    return tail;
+}
+
+Node* deleteFromBack(Node* head)
+{
+    Node* temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->next==NULL)
+        {
+            temp=temp->prev;
+            temp->next=NULL;
+            break;
+        }
+        temp=temp->next;
+    }
+    return temp;
+}
+
+Node* deleteFromBeginning(Node*head)
+{
+    head=head->next;
+    head->prev=NULL;
+    return head;
+}
+
+Node* deleteInBetween(Node* head,int pos)
+{
+    Node* temp=head;
+    int count=0;
+    while(temp!=NULL)
+    {
+        if(count==pos && temp->next==NULL)   // if position is of last node
+        {
+            (temp->prev)->next=NULL;
+            temp->prev=NULL;
+            break;
+        }
+        else if(count==pos && temp->prev==NULL)         //if position is of first node
+        {
+            (temp->next)->prev=NULL;
+            head=temp->next;
+            temp->next=NULL;
+            return head;  // new head;            
+        }
+        else if(count==pos)         // if positon other than first or last node
+        {
+            (temp->prev)->next=temp->next;
+            (temp->next)->prev=temp->prev;
+            temp->next=NULL;
+            temp->prev=NULL;
+            break;
+        }
+        count++;
+        temp=temp->next;
+    }
 }
 
 int main()
@@ -117,9 +185,13 @@ int main()
     cin>>pos;
     // insertAtEnd(head,data);
     // tail=insertAtEndUsingTail(tail,data);
-    // reversePrint(tail);
     // head=insertAtBeginning(head,data);
-    // insertInBetween(head,data,pos);
+    head=insertInBetween(head,data,pos);
+    // tail=deleteFromBack(tail);
+    // tail=deleteFromBack(head);
+    // head=deleteFromBeginning(head);
+    // head=deleteInBetween(head,pos);
+    // reversePrint(tail);
     print(head);
     return 0;
 }
