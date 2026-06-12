@@ -5,7 +5,7 @@ using namespace std;
 class Main
 {
     public:
-    bool function(int*arr, int n,int k)
+    bool search(int*arr, int n,int k)
     {
         int low=0,high=n-1;
         int mid=(low+high)/2;
@@ -56,7 +56,7 @@ int main()
     for(int i=0;i<n;i++)    cin>>arr[i];
     int k;
     cin>>k;
-    cout<<ob.function(arr,n,k);
+    cout<<ob.search(arr,n,k);
     // cout<<ob.recursion(arr,n,k,0,n-1);
     return 0;
 }
