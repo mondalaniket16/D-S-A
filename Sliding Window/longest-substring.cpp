@@ -52,23 +52,21 @@ int longestSubstringOptimal(string st, int n)
 {
     int i=0;
     int j=0;
-    string s="";
-    int len=0;
     int max=0;
-    while(i<n && j<n && i<=j)
+    int len=0;
+    map<char,int> hash;
+    while(j<n)
     {
-     
-        if(s.find(st[j])!=-1) // is st[j] present in the substring
+        
+        if(hash.find(st[j])!=hash.end()) // if element is present in hash
         {
-            i++;
-            s=s.substr(i,j-i);
+            if(hash[st[j]]>=i)       // check exisitng index is less than i or not
+            {
+                i=hash[st[j]]+1;        // place i after the previous index of the element
+            }
         }
-        else
-        {
-            s=s+st[j];
-        }
-        cout<<s<<endl;
         len=j-i+1;
+        hash[st[j]]=j;      // update the index of the element to new index j
         j++;
         if(len>max) max=len;
     }
