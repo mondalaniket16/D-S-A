@@ -1,5 +1,6 @@
 /*
- Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+ Given a binary array nums and an integer k, 
+ return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
 
 Examples
 Input : nums = [1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0] , k = 3
@@ -66,15 +67,38 @@ int maxOnesOptimal(int *arr, int n, int k)
         }
         else
         {
-            i=j;
-            c=0;
+            while(c>k)
+            {
+                if(arr[i]==0)   c--;
+                i++;
+            }
         }
         j++;
     }
     return max;
 }
 
-int main()
+int OptimalFinalBoss(int *arr, int n, int k)
+{
+    int l=0,r=0,maxLen=0,zeros=0;
+    while(r<n)
+    {
+        if(arr[r]==0)   zeros++;
+        if(zeros>k)
+        {
+            if(arr[l]==0)   zeros--;
+            l++;
+        }
+        if(zeros<=k)
+        {
+            maxLen = max(maxLen,r-l+1);
+        }
+        r++;
+    }
+    return maxLen;
+}
+
+int main()      // max len of subarry with atmost k zeros
 {
     int n;
     cin>>n;
@@ -83,5 +107,6 @@ int main()
     int k;
     cin>>k;
     // cout<<maxOnesBruteForce(arr,n,k);
-    cout<<maxOnesOptimal(arr,n,k);
+    // cout<<maxOnesOptimal(arr,n,k);
+    cout<<OptimalFinalBoss(arr,n,k);
 }
