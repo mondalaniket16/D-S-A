@@ -35,44 +35,32 @@ Hence we collected total of 4 fruits.
 #include<bits/stdc++.h>
 using namespace std;
 
-int maxFruitBruteForce(int*arr, int n)
+int maxFruitBruteForce(int*arr, int n)  // O(N^2) - max length subarry with atmost 2 distinct fruits
 {
     int c;
     int maxFruit=0;
     for(int j=0;j<n;j++)
     {
         c=0;
-        map<int,int> basketA;
-        map<int,int> basketB;
+        unordered_map<int,int> basket;
         for(int i=j;i<n;i++)
         {
-            if(basketA.find(arr[i])==basketA.end() && c==0)
+            if(basket.find(arr[i])==basket.end() && basket.size()<2)
             {
-                basketA[arr[i]]=1;
+                basket[arr[i]]=1;
                 c++;
             }
-            if(basketA.find(arr[i])==basketA.end() && basketB.find(arr[i])==basketB.end() && c==1)
+            else if(basket.find(arr[i])!=basket.end())
             {
-                basketB[arr[i]]=1;
+                basket[arr[i]]++;
                 c++;
             }
-            if(basketA.find(arr[i])!=basketA.end())
-            {
-                basketA[arr[i]]++;
-                c++;
-            }
-            if(basketB.find(arr[i])!=basketB.end())
-            {
-                basketB[arr[i]]++;
-                c++;
-            }
-            if(basketA.find(arr[i])==basketA.end() && basketB.find(arr[i])==basketB.end() && c>2)
+            else if(basket.find(arr[i])==basket.end() && basket.size()==2)
             {
                 break;
-            }
+            }   
         }
-        basketA.clear();
-        basketB.clear();
+        basket.clear();
         maxFruit = max(maxFruit,c);
     }
     return maxFruit;
