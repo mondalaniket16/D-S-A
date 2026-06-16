@@ -50,6 +50,22 @@ class RemoveDuplicates
             cout<<i<<", ";
         }
     }
+
+    void twoPointer(int*arr,int n)
+    {
+        int l=0,r=1;
+        int index=1;
+        while(r<n)
+        {
+            if(arr[r]!=arr[l])
+            {
+                arr[index++]=arr[r];
+                l=r;
+            }
+            r++;
+        }
+        for(int i = 0;i<n;i++)  cout<<arr[i]<<", ";
+    }
 };
 int main()
 {
@@ -58,6 +74,6 @@ int main()
     cin>>n;
     int arr[n];
     for(int i=0;i<n;i++)    cin>>arr[i];
-    cout<<"Array after removing duplicates: ";
-    ob.remove(arr,n);
+    cout<<"Array after removing duplicates: "<<endl;
+    ob.twoPointer(arr,n);
 }
