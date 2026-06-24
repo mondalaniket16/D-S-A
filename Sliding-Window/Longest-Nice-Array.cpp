@@ -30,11 +30,11 @@ int bruteForce(int* arr, int n) // basically non-overlapping elements
     while(r<n)
     {
         int result=0;
-        for(i=l;i<r;i++)
+        for(i=l; i<r; i++)
         {
-            for(j=i+1;j<=r;j++)
+            for(j=i+1; j<=r; j++)
             {
-                result=arr[i]&arr[j];
+                result = arr[i] & arr[j];
                 if(result!=0) break;
             }
             if(result!=0)   l++;
