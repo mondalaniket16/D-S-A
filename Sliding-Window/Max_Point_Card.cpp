@@ -23,31 +23,6 @@ The total score is 5 + 4 + 3 => 12
 #include<bits/stdc++.h>
 using namespace std;
 
-int optimal(int*arr, int n, int k)
-{
-    int count=0;
-    int l=0,r=n-1;
-    int sum=0;
-    while(count<k)
-    {
-        if(arr[l]>arr[r])   
-        {
-            // count<<arr[l];
-            sum+=arr[l];
-            l++;
-            count++;
-        }
-        else
-        {
-            // cout<<arr[r];
-            sum+=arr[r];
-            r--;
-            count++;
-        }
-    }
-    return sum;
-}
-
 int extremeBruteForce(int*arr, int n, int k)        // O(N^2)
 {
     int count=0;
@@ -72,7 +47,7 @@ int extremeBruteForce(int*arr, int n, int k)        // O(N^2)
     return maxsum;
 }
 
-int bruteForce(int*arr, int n, int k)       // O(2N)
+int optimal(int*arr, int n, int k)       // O(2N)
 {
     int maxSum=0,lSum=0,rSum=0;
     int j=n-1;
@@ -96,6 +71,5 @@ int main()
     for(int i=0;i<n;i++)    cin>>arr[i];
     int k;
     cin>>k;
-    // cout<<optimal(arr,n,k);
-    cout<<bruteForce(arr,n,k);
+    cout<<optimal(arr,n,k);
 }
