@@ -30,24 +30,27 @@ int main()
     cin>>n;
     int capacity;
     cin>>capacity;
-    int Item[n];
+    Item arr[n];   // array of items
     for(int i=0; i<n; i++)  
     {
-        cin>>Item[i].weight;
-        
+        cin>>arr[i].weight; 
+    }
+    for(int i=0; i<n; i++)
+    {
+        cin>>arr[i].value;
     }
     int w=capacity;
     float p = 0.0;
     for(int i=0; i<n; i++)
     {
-        if(weight[i] <= w)
+        if(arr[i].weight <= w)
         {
-            w=w-weight[i];
-            p+=value[i];
+            w=w-arr[i].weight;
+            p+=arr[i].value;
         }
         else
         {
-            p = p + (w*value[i]/weight[i]);
+            p = p + (w*arr[i].value/arr[i].weight);
             break;
         }
     }
