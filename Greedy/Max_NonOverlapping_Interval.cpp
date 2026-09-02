@@ -1,4 +1,18 @@
 /*
+For maximum number of non-overlapping intervals, the optimal greedy strategy is:
+Always select the interval that finishes earliest.
+This is the classic Activity Selection Problem.
+
+[1,3] [2,4] [3,5] [6,7] [5,9]
+
+[1,3] → [3,5] → [6,7]
+
+3
+
+Sorting: O(n log n)
+Greedy traversal: O(n)
+Overall: O(n log n)
+Extra space: O(1) excluding sorting space.
 
 */
 
